@@ -75,6 +75,7 @@ export class GameScene extends Phaser.Scene {
     this.cardView.onChoose = (i) => this.sim.chooseCard(i);
     this.reviewView.onPick = (id) => this.sim.pickTerm(id);
     this.loanView.onAccept = () => this.sim.acceptLoan();
+    this.loanView.onDecline = () => this.sim.declineLoan();
     this.panels.onBuy = (kind, id) => this.onBuy(kind, id);
     this.hud.onPause = () => this.pause();
     this.ship.onTap = () => {

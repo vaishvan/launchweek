@@ -111,6 +111,32 @@ describe("checkpoints", () => {
     expect(sim.s.phase).toBe("play");
   });
 
+  it("the player can ask for a bridge loan, turn it down, or take it", () => {
+    const sim = new Sim(1);
+    sim.requestLoan();
+    expect(sim.s.phase).toBe("loan");
+    sim.declineLoan();
+    expect(sim.s.phase).toBe("play");
+    expect(sim.s.loans).toBe(0);
+    const cash = sim.s.cash;
+    sim.requestLoan();
+    sim.acceptLoan();
+    expect(sim.s.loans).toBe(1);
+    expect(sim.s.cash).toBeGreaterThan(cash);
+    expect(sim.s.debt).toBeGreaterThan(0);
+    expect(sim.s.cpIndex).toBe(0); // asking does not skip the funding round
+    sim.s.loans = T.loan.maxLoans;
+    expect(sim.canRequestLoan()).toBe(false);
+  });
+
+  it("forced loans cannot be declined", () => {
+    const sim = new Sim(1);
+    sim.s.cash = -1;
+    run(sim, 0.1);
+    sim.declineLoan();
+    expect(sim.s.phase).toBe("loan");
+  });
+
   it("a missed deadline is a bridge loan with a debt repaid from the next injection", () => {
     const sim = new Sim(1);
     sim.s.t = CHECKPOINTS[0].deadline - 0.05;

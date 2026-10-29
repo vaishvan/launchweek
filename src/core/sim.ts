@@ -37,7 +37,7 @@ export interface Review {
   offer: string[]; // term ids, empty on miss or final
 }
 
-export interface LoanOffer { reason: "miss" | "cash"; advance: number; checkpoint: number }
+export interface LoanOffer { reason: "miss" | "cash" | "ask"; advance: number; checkpoint: number }
 
 export type SimEvent =
   | { type: "card"; id: string }
@@ -434,7 +434,7 @@ export class Sim {
     this.offerLoan("miss");
   }
 
-  private offerLoan(reason: "miss" | "cash"): void {
+  private offerLoan(reason: LoanOffer["reason"]): void {
     if (this.s.loans >= T.loan.maxLoans) {
       // out of loans: a cash crunch is fatal, a missed target just moves on with no money
       if (reason === "cash") return this.end("shutdown");
@@ -446,6 +446,22 @@ export class Sim {
     this.s.loan = { reason, advance: Math.round(cp.injection * T.economy.injectionScale * T.loan.advanceShare), checkpoint: this.s.cpIndex };
     this.s.phase = "loan";
     this.events.push({ type: "loan" });
+  }
+
+  /** Player asks for a bridge loan from the HUD. Only between cards, while loans are left. */
+  canRequestLoan(): boolean {
+    return this.s.phase === "play" && !this.s.card && this.s.loans < T.loan.maxLoans;
+  }
+
+  requestLoan(): void {
+    if (this.canRequestLoan()) this.offerLoan("ask");
+  }
+
+  /** Only a loan the player asked for can be turned down; crunch and miss loans are forced. */
+  declineLoan(): void {
+    if (this.s.phase !== "loan" || this.s.loan?.reason !== "ask") return;
+    this.s.loan = null;
+    this.s.phase = "play";
   }
 
   acceptLoan(): void {

@@ -189,6 +189,7 @@ export class ReviewView {
 export class LoanView {
   private c: Phaser.GameObjects.Container | null = null;
   onAccept: (() => void) | null = null;
+  onDecline: (() => void) | null = null;
   constructor(private scene: Phaser.Scene, private sim: Sim) {}
 
   show(): void {
@@ -201,7 +202,7 @@ export class LoanView {
     c.add(panel(s, x, y, w, h, 0x3a1030));
     c.add(centerX(text(s, 0, y + 8, "BRIDGE LOAN", C.red2, 2), W / 2));
     const cp = CHECKPOINTS[l.checkpoint];
-    const why = l.reason === "miss" ? `YOU MISSED THE ${cp?.name ?? ""} TARGET.` : "THE BANK ACCOUNT HIT ZERO.";
+    const why = l.reason === "miss" ? `YOU MISSED THE ${cp?.name ?? ""} TARGET.` : l.reason === "cash" ? "THE BANK ACCOUNT HIT ZERO." : "NEED CASH NOW?";
     const body = wrap(`${why} AN INVESTOR WILL BRIDGE YOU. AT A PRICE.`, w - 16);
     c.add(text(s, x + 8, y + 28, body, C.white).setLineSpacing(2));
     const after = this.sim.s.loans + 1;
@@ -212,9 +213,15 @@ export class LoanView {
       [`LOANS: ${after}/3${after >= 3 ? " (NEXT CRUNCH = SHUTDOWN)" : ""}`, after < 3],
     ] as const;
     facts.forEach(([t, good], i) => c.add(text(s, x + 8, y + 58 + i * 9, t, good ? C.green2 : C.red2).setMaxWidth(w - 16)));
-    c.add(new Button(s, x + 20, y + h - 30, { w: w - 40, h: 20, label: "TAKE THE MONEY", face: C.red, sound: "loan" }, () => this.onAccept?.()));
+    if (l.reason === "ask") {
+      const bw = (w - 24) / 2;
+      c.add(new Button(s, x + 8, y + h - 30, { w: bw, h: 20, label: "NO THANKS", face: C.steel2 }, () => this.onDecline?.()));
+      c.add(new Button(s, x + 16 + bw, y + h - 30, { w: bw, h: 20, label: "TAKE IT", face: C.red, sound: "loan" }, () => this.onAccept?.()));
+    } else {
+      c.add(new Button(s, x + 20, y + h - 30, { w: w - 40, h: 20, label: "TAKE THE MONEY", face: C.red, sound: "loan" }, () => this.onAccept?.()));
+    }
     this.c = c;
-    Sfx.play("cp_miss");
+    Sfx.play(l.reason === "ask" ? "open" : "cp_miss");
   }
 
   hide(): void {
