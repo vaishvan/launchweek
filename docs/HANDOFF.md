@@ -19,6 +19,7 @@ bots finish a run in 14-16 min at a casual 1.5 taps/s (retimed 30 -> 20 -> 15 mi
 - PRD open questions were answered with defaults (`docs/design/TUNING_NOTES.md`); owner to confirm.
 
 ## Known broken or flaky
+- Live site: https://vaishvan.github.io/launch-week/ (GitHub Pages, `.github/workflows/deploy.yml` deploys every push to main).
 - Kit `smoke --screenshot` captures before modals render; use `node tools/capture.mjs` for phone-size screenshots.
 - Card portraits are drawn at 2x pixel size (mixed pixel scale with the 1x office).
 
