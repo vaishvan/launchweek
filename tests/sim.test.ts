@@ -259,12 +259,20 @@ describe("endings", () => {
 });
 
 describe("full runs (bots)", () => {
-  it("a steady player reaches 1M in roughly 15-21 minutes", () => {
+  it("a casual player (1.5 taps/s) reaches 1M in roughly 13-17 minutes", () => {
+    for (const seed of [1, 2]) {
+      const sim = runBot(new Sim(seed), new Bot("pace", 1.5));
+      expect(sim.s.ending).not.toBe("zombie");
+      expect(sim.s.t).toBeGreaterThan(13 * 60);
+      expect(sim.s.t).toBeLessThan(17 * 60);
+    }
+  });
+  it("a steady player reaches 1M sooner, with taps a real share of growth", () => {
     for (const seed of [1, 2]) {
       const sim = runBot(new Sim(seed), new Bot("pace", 2.75));
       expect(sim.s.ending).not.toBe("zombie");
-      expect(sim.s.t).toBeGreaterThan(15 * 60);
-      expect(sim.s.t).toBeLessThan(21 * 60);
+      expect(sim.s.t).toBeGreaterThan(9 * 60);
+      expect(sim.s.t).toBeLessThan(15 * 60);
       const share = sim.s.tapUsers / (sim.s.tapUsers + sim.s.idleUsers);
       expect(share).toBeGreaterThan(0.2);
       expect(share).toBeLessThan(0.4);

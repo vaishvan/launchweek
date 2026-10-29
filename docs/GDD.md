@@ -5,15 +5,15 @@
 
 ## Identity
 - **Working title:** Launch Week (a codename is fine, do not spend time on the name yet)
-- **One-line pitch:** A one-sitting pixel idle tycoon: grow an AI startup to 1,000,000 users in about 20 minutes while crisis cards (bad tweets, ghosting partners, free competitors) bite.
+- **One-line pitch:** A one-sitting pixel idle tycoon: grow an AI startup to 1,000,000 users in about 15 minutes while crisis cards (bad tweets, ghosting partners, free competitors) bite.
 - **Genre:** Idle / incremental tycoon with timed decision cards
 - **Perspective:** 2D pixel art, office cross-section (portrait, mobile-first, 180x320)
 - **Reference games:** Tiny Tower (stacked floors), Reigns (swipe-speed decisions), Cookie Clicker (tap + idle)
-- **The twist:** a finite 20-minute run with funding deadlines, investor terms and multiple satirical endings, instead of an endless idler
+- **The twist:** a finite 15-minute run with funding deadlines, investor terms and multiple satirical endings, instead of an endless idler
 
 ## Pillars (3 max)
 Pillars decide arguments. If a feature does not serve one, it goes to the Parking lot.
-1. **One sitting**: about 20 minutes start to ending; no saves, no offline progress
+1. **One sitting**: about 15 minutes start to ending at a casual pace; no saves, no offline progress
 2. **The engine hums, the events bite**: idle growth is the calm, crisis cards are the drama
 3. **Everything costs something; your choices pick your ending**
 
@@ -43,7 +43,7 @@ Loop at three time scales (if you cannot fill all three, the game's structure is
 | **MVP / Release** | Minimum content that makes a shippable product | Passes `/release-check` |
 | **Stretch** | Everything else | Only after release scope is locked |
 
-Current tier: **Vertical slice** (full 20-minute run playable with final-style art and audio; needs human playtests)
+Current tier: **Vertical slice** (full 15-minute run playable with final-style art and audio; needs human playtests)
 
 Claude scopes work by this line (SOP-08 "Tiers"). Move it with `/next-tier` when the tier's "Done means" is met.
 

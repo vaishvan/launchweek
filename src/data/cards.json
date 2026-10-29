@@ -4,7 +4,7 @@
     {
       "id": "early_bird",
       "act": 1,
-      "at": 60,
+      "at": 50,
       "portrait": "creator",
       "severity": 1,
       "title": "The Early Bird",
@@ -44,7 +44,7 @@
     {
       "id": "bad_tweet",
       "act": 1,
-      "at": 200,
+      "at": 160,
       "portrait": "intern",
       "severity": 2,
       "title": "The Bad Tweet",
@@ -81,7 +81,7 @@
     {
       "id": "partner_ghost",
       "act": 1,
-      "at": 300,
+      "at": 240,
       "portrait": "partner",
       "severity": 2,
       "title": "The Partner Ghost",
@@ -117,7 +117,7 @@
     {
       "id": "term_sheet",
       "act": 1,
-      "at": 380,
+      "at": 305,
       "portrait": "investor",
       "severity": 1,
       "title": "Term Sheet Drama",
@@ -161,7 +161,7 @@
     {
       "id": "hallucination",
       "act": 2,
-      "at": 480,
+      "at": 385,
       "portrait": "user",
       "severity": 2,
       "title": "Hallucination Screenshot",
@@ -197,7 +197,7 @@
     {
       "id": "creator_raise",
       "act": 2,
-      "at": 560,
+      "at": 450,
       "portrait": "creator",
       "severity": 1,
       "title": "The Creator Wants a Raise",
@@ -240,7 +240,7 @@
     {
       "id": "burnout",
       "act": 2,
-      "at": 660,
+      "at": 530,
       "portrait": "engineer_sleep",
       "severity": 2,
       "title": "Burnout Under the Desk",
@@ -284,7 +284,7 @@
     {
       "id": "press_call",
       "act": 2,
-      "at": 740,
+      "at": 590,
       "portrait": "blogger",
       "severity": 1,
       "title": "The Press Call",
@@ -325,7 +325,7 @@
     {
       "id": "free_competitor",
       "act": 3,
-      "at": 840,
+      "at": 670,
       "portrait": "bigLab",
       "severity": 3,
       "title": "The Free Competitor",
@@ -367,7 +367,7 @@
     {
       "id": "pile_on",
       "act": 3,
-      "at": 920,
+      "at": 735,
       "portrait": "press",
       "severity": 3,
       "title": "The Pile-On",
@@ -406,7 +406,7 @@
     {
       "id": "acquisition",
       "act": 3,
-      "at": 1040,
+      "at": 830,
       "portrait": "bigLab",
       "severity": 2,
       "title": "The Acquisition Offer",
@@ -479,7 +479,7 @@
     {
       "id": "meltdown",
       "act": 3,
-      "at": 1160,
+      "at": 930,
       "portrait": "server",
       "severity": 3,
       "title": "Launch Day Meltdown",

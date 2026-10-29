@@ -1,7 +1,7 @@
 # Launch Week
 
 A one-sitting pixel idle tycoon. You are the first growth hire at an AI startup: get to **1,000,000 users in about
-20 minutes**. Tap SHIP, hire, open channels, survive 12 crisis cards, pass 5 funding rounds (each with an investor
+15 minutes**. Tap SHIP, hire, open channels, survive 12 crisis cards, pass 5 funding rounds (each with an investor
 term that has a perk and a catch), and earn one of 7 endings with a shareable card.
 
 Portrait, mobile-first, runs in any modern browser. Phaser 4 + TypeScript + Vite, scaffolded with the

@@ -4,12 +4,12 @@
     "startCash": 1000,
     "startSentiment": 1.0,
     "startMorale": 70,
-    "hardEndSec": 1280,
+    "hardEndSec": 1020,
     "tickHz": 20,
     "landingPageOutput": 2.5
   },
   "income": {
-    "perUserPerSec": 0.0011
+    "perUserPerSec": 0.0022
   },
   "multipliers": {
     "floor": 0.3,
@@ -43,7 +43,7 @@
     "recoverPerSec": 0.05,
     "burnoutBelow": 15,
     "burnoutHireMult": 0.5,
-    "graceUntilSec": 120
+    "graceUntilSec": 95
   },
   "tap": {
     "base": 1,
@@ -263,42 +263,42 @@
       "id": "preseed",
       "name": "Pre-seed",
       "target": 1000,
-      "deadline": 160,
+      "deadline": 130,
       "injection": 1000
     },
     {
       "id": "seed",
       "name": "Seed",
       "target": 10000,
-      "deadline": 440,
+      "deadline": 350,
       "injection": 8000
     },
     {
       "id": "seriesA",
       "name": "Series A",
       "target": 50000,
-      "deadline": 700,
+      "deadline": 560,
       "injection": 40000
     },
     {
       "id": "seriesB",
       "name": "Series B",
       "target": 200000,
-      "deadline": 880,
+      "deadline": 705,
       "injection": 150000
     },
     {
       "id": "seriesC",
       "name": "Series C",
       "target": 500000,
-      "deadline": 1080,
+      "deadline": 865,
       "injection": 500000
     },
     {
       "id": "final",
       "name": "Final",
       "target": 1000000,
-      "deadline": 1280,
+      "deadline": 1020,
       "injection": 0,
       "final": true
     }
@@ -335,7 +335,7 @@
     "priceCurveFrom": 100,
     "priceCurveExp": 0.75,
     "upgradeScale": 1,
-    "priceScale": 0.7,
+    "priceScale": 0.3,
     "injectionScale": 0.4,
     "cardCashScale": 0.5,
     "upgradeExp": 0.3

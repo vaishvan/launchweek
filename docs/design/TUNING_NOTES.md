@@ -5,13 +5,21 @@ Balance is checked with bots: `npx vitest run --config tools/balance/vitest.bala
 (env `BOTS=pace,idler,tapper,chaos,acquire`, `SEEDS=N`, `TAP=taps per second`).
 
 ## Results with the current numbers
-Run retimed from ~30 to ~20 minutes on 2026-10-29 (see the table below the results).
+Target since 2026-10-29: a casual player (1.5 taps/s) finishes in about 15 real minutes.
 | Player | Result |
 |---|---|
-| Steady player, 2.5 taps/s | 1M in 18-19 min, IPO Bell, tap share ~28% |
-| Fast tapper, 3 taps/s | 1M in 17-18.5 min |
-| Casual, 1.5 taps/s | Zombie Startup at 500-640K |
-| Taps only / idle only | Zombie Startup (125-345K) |
+| Casual, 1.5 taps/s | 1M in 14-16 min, IPO Bell, tap share ~17% |
+| Steady, 2.5 taps/s | 1M in 11.5-13.5 min, tap share ~26% |
+| Fast tapper, 3 taps/s | 1M in 10.5-11.5 min |
+| Random card choices (chaos bot) | 1M in 14-15 min |
+| Taps only / idle only | Zombie Startup (115-555K) |
+
+## 15-minute retime (2026-10-29, on top of the 20-minute one)
+| What | Was | Now | Why |
+|---|---|---|---|
+| All times (deadlines, card `at`, grace, hard end) | hard end 21:20 | x0.8, hard end 17:00 | Keep deadlines meaningful for a faster run |
+| Income per user | $0.0011/s | $0.0022/s | Owner: more money earned; casual should finish in ~15 min |
+| `priceScale` | 0.7 | 0.3 | Income alone left casual players stuck before the big channels |
 
 ## 20-minute retime (2026-10-29)
 | What | Was | Now | Why |
@@ -57,4 +65,4 @@ User-count card triggers (`atUsers`) and checkpoint user targets are unchanged.
 | Q16 font | pxl's 3x5 pixel font as a proportional bitmap font |
 | Q17 endings audio | 3 jingles (good / mixed / bad) |
 | Units | S 1 = 0.01x sentiment; R 1 = +1% hype buff (cards hold 20 s, decay 40 s); M 1 = 1 morale point |
-| Doc conflicts | Content doc wins (Operator: morale drains 10% faster; Hype Fund: sentiment gains -25%; Brand Angel: hires +20%); run hard-ends at 21:20 |
+| Doc conflicts | Content doc wins (Operator: morale drains 10% faster; Hype Fund: sentiment gains -25%; Brand Angel: hires +20%); run hard-ends at 17:00 |

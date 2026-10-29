@@ -30,7 +30,7 @@ export class TitleScene extends Phaser.Scene {
     for (let y = 156; y < 236; y += 8) for (let x = 56; x < 126; x += 8) if ((x * 7 + y * 3) % 5 !== 0) g.fillStyle((x + y) % 3 ? C.gold2 : C.sky).fillRect(x, y, 4, 4);
     g.fillStyle(C.steel).fillRect(88, 136, 2, 14);
     this.add.image(W / 2, 52, "ui", "logo").setOrigin(0.5);
-    centerX(text(this, 0, 82, "1,000,000 USERS. 20 MINUTES.", C.cream), W / 2);
+    centerX(text(this, 0, 82, "1,000,000 USERS. 15 MINUTES.", C.cream), W / 2);
     centerX(text(this, 0, 90, "ONE BAD TWEET.", C.red2), W / 2);
 
     const nameLbl = centerX(text(this, 0, 106, `YOUR STARTUP: ${this.company}`, C.gold2), W / 2);
