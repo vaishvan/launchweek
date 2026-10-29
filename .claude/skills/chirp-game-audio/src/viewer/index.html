@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chirp live</title>
+<style>
+  :root { --bg: #14131b; --panel: #1c1a26; --panel2: #25222f; --line: #322d40; --text: #e8e4f0; --dim: #9a93ab;
+    --accent: #ffb454; --bad: #ff6b7a; --ok: #7bd88f; --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 13px/1.4 system-ui, sans-serif; }
+  body { display: grid; grid-template: "head head" 44px "list main" 1fr / 250px 1fr; }
+  header { grid-area: head; display: flex; align-items: center; gap: 14px; padding: 0 14px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .logo { font: 700 15px var(--mono); color: var(--accent); letter-spacing: 1px; }
+  .file { font-family: var(--mono); color: var(--dim); }
+  .grow { flex: 1; }
+  .pill { padding: 2px 9px; border-radius: 99px; font: 600 11px var(--mono); background: var(--panel2); color: var(--dim); }
+  .pill.ok { color: var(--ok); } .pill.bad { color: var(--bad); }
+  label { display: flex; gap: 6px; align-items: center; color: var(--dim); cursor: pointer; user-select: none; }
+  #list { grid-area: list; background: var(--panel); border-right: 1px solid var(--line); overflow: auto; padding: 6px; }
+  .sect { font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: 1px; color: var(--dim); margin: 12px 6px 4px; }
+  .row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 6px; cursor: pointer; position: relative; }
+  .row:hover { background: var(--panel2); } .row.sel { background: #3a3150; }
+  .row .nm { font: 12px var(--mono); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .d { font: 10px var(--mono); color: var(--dim); }
+  .row .pl { border: 0; background: none; color: var(--accent); cursor: pointer; font-size: 13px; padding: 0 2px; }
+  .dot { width: 7px; height: 7px; border-radius: 9px; } .dot.err { background: var(--bad); } .dot.new { background: var(--accent); animation: fade 2.5s forwards; }
+  @keyframes fade { to { opacity: 0; } }
+  main { grid-area: main; overflow: auto; padding: 16px 18px; }
+  #bar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+  button.big { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 7px; padding: 6px 14px; cursor: pointer; font: 600 13px var(--mono); }
+  button.big:hover { border-color: var(--accent); }
+  #prev { width: 100%; max-width: 900px; border-radius: 8px; display: block; background: #0e0d13; }
+  #info { margin: 12px 0; padding: 10px 12px; background: var(--panel); border-radius: 8px; font: 12px/1.6 var(--mono); white-space: pre-wrap; color: var(--dim); max-width: 900px; }
+  #layers { display: flex; flex-wrap: wrap; gap: 6px; max-width: 900px; }
+  #layers button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; cursor: pointer; font: 11px var(--mono); }
+  #layers button:hover { border-color: var(--accent); }
+  #err { display: none; margin-bottom: 12px; padding: 12px 14px; border-radius: 8px; background: #2b1720; border: 1px solid var(--bad); color: #ffd3d8; font: 12px/1.5 var(--mono); white-space: pre-wrap; max-width: 900px; }
+  #wrap { position: relative; max-width: 900px; }
+  #ann { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  body.annotating #ann { pointer-events: auto; cursor: crosshair; }
+  header button, #annot button { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 3px 10px; cursor: pointer; font: 12px var(--mono); }
+  header button.on, #annot button.on { color: var(--accent); border-color: var(--accent); }
+  #annot { display: none; max-width: 900px; margin: 10px 0; padding: 10px 12px; background: var(--panel); border-radius: 8px; }
+  body.annotating #annot { display: block; }
+  #annot .r { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+  #annot .chip { width: 22px; height: 22px; padding: 0; }
+  #annot textarea { width: 100%; min-height: 48px; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 6px; font: 12px var(--mono); padding: 6px; }
+  #items { list-style: none; margin: 0 0 8px; padding: 0; font: 11px var(--mono); max-height: 130px; overflow: auto; }
+  #items li { display: flex; gap: 6px; padding: 2px 0; } #items b { color: #ffb454; } #items span { flex: 1; } #items a { color: var(--bad); cursor: pointer; }
+  #fbstatus { font: 11px var(--mono); color: var(--dim); margin-left: 8px; }
+  #unlock { position: fixed; inset: 0; background: #000a; display: grid; place-items: center; font: 600 16px var(--mono); color: var(--accent); cursor: pointer; }
+</style>
+</head>
+<body>
+<header><span class="logo">CHIRP</span><span class="file" id="file"></span><span class="grow"></span>
+  <button id="annotbtn" title="mark spans and pin notes for Claude (a)">✎ annotate</button>
+  <label><input type="checkbox" id="auto" checked> play on save</label>
+  <label><input type="checkbox" id="loop"> loop</label>
+  <span class="pill" id="status">connecting</span></header>
+<aside id="list"></aside>
+<main>
+  <div id="err"></div>
+  <div id="bar"><button class="big" id="play">▶ play</button><button class="big" id="stop">■ stop</button><span class="file" id="title"></span></div>
+  <div id="wrap"><img id="prev" alt=""><canvas id="ann"></canvas></div>
+  <div id="annot">
+    <div class="r"><b style="font:600 11px var(--mono);color:var(--dim)">FEEDBACK FOR CLAUDE</b>
+      <button id="t-span" class="on" title="drag over the plots (s): on the spectrogram it keeps the band">span</button>
+      <button id="t-note" title="click a moment (n)">note</button><button id="t-erase" title="click a span or note (e)">erase</button>
+      <span id="colors" class="r" style="margin:0"></span><button id="t-clear">clear</button></div>
+    <div style="font:10px var(--mono);color:var(--dim);margin-bottom:6px">magenta = fix this, cyan = keep this, yellow = check this. Drag on the spectrogram to mark a band, on the waveform for all frequencies.</div>
+    <ol id="items"></ol>
+    <textarea id="comment" placeholder="overall comment…"></textarea>
+    <div class="r" style="margin:6px 0 0"><button id="send" class="on">send to Claude</button><span id="fbstatus"></span></div>
+  </div>
+  <div id="info"></div>
+  <div class="sect">layers (click to solo)</div>
+  <div id="layers"></div>
+</main>
+<div id="unlock">click anywhere to enable sound</div>
+<script src="/app.js"></script>
+</body>
+</html>

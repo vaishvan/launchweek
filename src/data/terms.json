@@ -1,0 +1,13 @@
+{
+  "_note": "8 investor terms (content doc section 6). Keys are modifiers read by src/core/modifiers.ts.",
+  "terms": [
+    { "id": "growthVC",   "name": "Growth VC",        "icon": "term_growth",  "perk": "Channel output +20%",              "catch": "Next target +15%",            "mods": { "channelMult": 1.2, "nextTargetMult": 1.15 } },
+    { "id": "brandAngel", "name": "Brand Angel",      "icon": "term_angel",   "perk": "Sentiment never below 0.8x",       "catch": "Hire costs +20%",             "mods": { "sentimentFloor": 0.8, "hireCostMult": 1.2 } },
+    { "id": "operator",   "name": "The Operator",     "icon": "term_operator","perk": "Hire costs -25%",                  "catch": "Morale drains 10% faster",    "mods": { "hireCostMult": 0.75, "moraleDrainMult": 1.1 } },
+    { "id": "hypeFund",   "name": "Hype Fund",        "icon": "term_hype",    "perk": "Launch Moments last 2x",           "catch": "Sentiment gains -25%",        "mods": { "launchMult": 2, "sentimentGainMult": 0.75 } },
+    { "id": "revenue",    "name": "Revenue Partners", "icon": "term_revenue", "perk": "Cash income +30%",                 "catch": "Tap power -15%",              "mods": { "incomeMult": 1.3, "tapMult": 0.85 } },
+    { "id": "accel",      "name": "The Accelerator",  "icon": "term_accel",   "perk": "Tap power +25%, combo fills faster","catch": "Channel unlock costs +20%",  "mods": { "tapMult": 1.25, "comboFillMult": 1.25, "unlockCostMult": 1.2 } },
+    { "id": "patient",    "name": "Patient Capital",  "icon": "term_patient", "perk": "Bridge loans carry no penalty",    "catch": "Checkpoint cash -40%",        "mods": { "loanPenaltyFree": 1, "injectionMult": 0.6 } },
+    { "id": "nepo",       "name": "Nepo Baby Fund",   "icon": "term_nepo",    "perk": "Checkpoint cash +100%",            "catch": "Card default penalties x1.5", "mods": { "injectionMult": 2, "defaultPenaltyMult": 1.5 } }
+  ]
+}

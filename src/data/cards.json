@@ -1,0 +1,539 @@
+{
+  "_note": "12 scripted crisis cards (launch-week-content.md section 5). Effects: S/R/M in doc units (S 1 = 0.01x sentiment, R 1 = +1% reach buff, M 1 = 1 morale point). cost = cash paid up front. Cards fire at 'at' seconds or when users reach 'atUsers', whichever comes first (min gap cards.minGapSec).",
+  "cards": [
+    {
+      "id": "early_bird",
+      "act": 1,
+      "at": 90,
+      "portrait": "creator",
+      "severity": 1,
+      "title": "The Early Bird",
+      "body": "A tech creator posted a 40-second demo of your app. You haven't launched yet.",
+      "options": [
+        {
+          "label": "Pay $300 to pin it",
+          "cost": 300,
+          "effects": {
+            "R": 40,
+            "users": 300,
+            "S": -5,
+            "flag": "paidCreator"
+          }
+        },
+        {
+          "label": "Collab on a thread",
+          "effects": {
+            "R": 25,
+            "S": 5,
+            "M": -5
+          }
+        },
+        {
+          "label": "Thank them, move on",
+          "effects": {
+            "S": 8,
+            "R": 10
+          }
+        }
+      ],
+      "default": {
+        "R": 10
+      },
+      "atUsers": 400
+    },
+    {
+      "id": "bad_tweet",
+      "act": 1,
+      "at": 300,
+      "portrait": "intern",
+      "severity": 2,
+      "title": "The Bad Tweet",
+      "body": "The company account posts: \"AI will replace growth teams lol\".",
+      "options": [
+        {
+          "label": "Delete and apologize",
+          "effects": {
+            "S": -5
+          }
+        },
+        {
+          "label": "Double down (it's a bit)",
+          "effects": {
+            "R": 50,
+            "S": -20,
+            "flag": "doubledDown"
+          }
+        },
+        {
+          "label": "Ignore it",
+          "effects": {
+            "S": -12,
+            "usersPct": -2
+          }
+        }
+      ],
+      "default": {
+        "S": -12,
+        "usersPct": -2
+      },
+      "atUsers": 3000
+    },
+    {
+      "id": "partner_ghost",
+      "act": 1,
+      "at": 450,
+      "portrait": "partner",
+      "severity": 2,
+      "title": "The Partner Ghost",
+      "body": "SynergyCorp, your co-launch partner, pulls out two days before launch.",
+      "options": [
+        {
+          "label": "Renegotiate ($2,000)",
+          "cost": 2000,
+          "effects": {}
+        },
+        {
+          "label": "Smaller partner ($500)",
+          "cost": 500,
+          "effects": {
+            "R": 10,
+            "users": 400
+          }
+        },
+        {
+          "label": "Go solo, subtweet them",
+          "effects": {
+            "R": 30,
+            "S": -10
+          }
+        }
+      ],
+      "default": {
+        "R": -10,
+        "M": -8
+      },
+      "atUsers": 5000
+    },
+    {
+      "id": "term_sheet",
+      "act": 1,
+      "at": 570,
+      "portrait": "investor",
+      "severity": 1,
+      "title": "Term Sheet Drama",
+      "body": "A seed investor will fund you, but only if you \"pivot to agents.\"",
+      "options": [
+        {
+          "label": "Pivot to agents",
+          "effects": {
+            "cash": 10000,
+            "S": -5
+          }
+        },
+        {
+          "label": "Decline",
+          "effects": {
+            "M": 10
+          }
+        },
+        {
+          "label": "Negotiate",
+          "effects": {
+            "roll": {
+              "chance": 0.5,
+              "win": {
+                "cash": 5000,
+                "note": "They blinked. +$5,000."
+              },
+              "lose": {
+                "R": -10,
+                "note": "The investor walked."
+              }
+            }
+          }
+        }
+      ],
+      "default": {
+        "M": 10
+      },
+      "atUsers": 8500
+    },
+    {
+      "id": "hallucination",
+      "act": 2,
+      "at": 720,
+      "portrait": "user",
+      "severity": 2,
+      "title": "Hallucination Screenshot",
+      "body": "Your product told a user the capital of Australia is Sydney. Then it fired them.",
+      "options": [
+        {
+          "label": "Own it with a meme",
+          "effects": {
+            "R": 40,
+            "S": 5,
+            "M": 5
+          }
+        },
+        {
+          "label": "Quiet patch",
+          "effects": {
+            "S": -8
+          }
+        },
+        {
+          "label": "Blame the model vendor",
+          "effects": {
+            "R": 10,
+            "S": -15
+          }
+        }
+      ],
+      "default": {
+        "S": -15
+      },
+      "atUsers": 13000
+    },
+    {
+      "id": "creator_raise",
+      "act": 2,
+      "at": 840,
+      "portrait": "creator",
+      "severity": 1,
+      "title": "The Creator Wants a Raise",
+      "altTitle": "A Bigger Creator Slides In",
+      "body": "The creator from launch day wants $10,000 to keep posting about you.",
+      "altBody": "A bigger creator cold-DMs you. Their rate card is $10,000.",
+      "altIfNotFlag": "paidCreator",
+      "options": [
+        {
+          "label": "Pay $10,000",
+          "cost": 10000,
+          "effects": {
+            "R": 60,
+            "users": 2000
+          }
+        },
+        {
+          "label": "Refuse",
+          "effects": {
+            "R": -10
+          }
+        },
+        {
+          "label": "Offer equity",
+          "effects": {
+            "R": 40,
+            "users": 1500,
+            "perm": {
+              "stat": "income",
+              "mult": 0.95
+            }
+          }
+        }
+      ],
+      "default": {
+        "R": -10
+      },
+      "atUsers": 28000
+    },
+    {
+      "id": "burnout",
+      "act": 2,
+      "at": 990,
+      "portrait": "engineer_sleep",
+      "severity": 2,
+      "title": "Burnout Under the Desk",
+      "body": "Your best engineer is asleep under their desk with a keyboard for a pillow.",
+      "options": [
+        {
+          "label": "Mandatory week off",
+          "effects": {
+            "M": 25,
+            "temp": {
+              "stat": "output",
+              "mult": 0.8,
+              "sec": 30
+            }
+          }
+        },
+        {
+          "label": "Push through",
+          "effects": {
+            "M": -20,
+            "temp": {
+              "stat": "output",
+              "mult": 1.3,
+              "sec": 60
+            }
+          }
+        },
+        {
+          "label": "Hire a contractor ($5,000)",
+          "cost": 5000,
+          "effects": {
+            "M": 10
+          }
+        }
+      ],
+      "default": {
+        "M": -10
+      },
+      "atUsers": 45000
+    },
+    {
+      "id": "press_call",
+      "act": 2,
+      "at": 1110,
+      "portrait": "blogger",
+      "severity": 1,
+      "title": "The Press Call",
+      "body": "A tech blogger wants a quick interview about \"your journey.\"",
+      "options": [
+        {
+          "label": "Take the call",
+          "effects": {
+            "roll": {
+              "chance": "sentiment",
+              "win": {
+                "R": 60,
+                "S": 10,
+                "note": "Glowing write-up."
+              },
+              "lose": {
+                "S": -15,
+                "note": "You said 'synergy' nine times."
+              }
+            }
+          }
+        },
+        {
+          "label": "Send the founder",
+          "effects": {
+            "R": 20,
+            "M": -5
+          }
+        },
+        {
+          "label": "No comment",
+          "effects": {}
+        }
+      ],
+      "default": {},
+      "atUsers": 80000
+    },
+    {
+      "id": "free_competitor",
+      "act": 3,
+      "at": 1260,
+      "portrait": "bigLab",
+      "severity": 3,
+      "title": "The Free Competitor",
+      "body": "NeoMind, a big lab, launches a free rival and calls it \"democratizing.\"",
+      "options": [
+        {
+          "label": "Counter-launch ($20,000)",
+          "cost": 20000,
+          "effects": {
+            "R": 50,
+            "M": -5
+          }
+        },
+        {
+          "label": "Price war",
+          "effects": {
+            "users": 20000,
+            "temp": {
+              "stat": "income",
+              "mult": 0.8,
+              "sec": 120
+            }
+          }
+        },
+        {
+          "label": "Ignore it",
+          "effects": {
+            "usersPct": -3,
+            "S": -5
+          }
+        }
+      ],
+      "default": {
+        "usersPct": -3,
+        "S": -5
+      },
+      "atUsers": 220000
+    },
+    {
+      "id": "pile_on",
+      "act": 3,
+      "at": 1380,
+      "portrait": "press",
+      "severity": 3,
+      "title": "The Pile-On",
+      "body": "A headline reads: \"Move Fast, Break Everything.\"",
+      "doubleIfFlag": "doubledDown",
+      "altBody": "A headline reads: \"Move Fast, Break Everything.\" It quotes your Bad Tweet. Twice.",
+      "options": [
+        {
+          "label": "Public apology",
+          "effects": {
+            "S": 8,
+            "R": -10
+          }
+        },
+        {
+          "label": "Transparency report ($8,000)",
+          "cost": 8000,
+          "effects": {
+            "S": 12,
+            "M": 5
+          }
+        },
+        {
+          "label": "Hit back with a thread",
+          "effects": {
+            "R": 40,
+            "S": -20
+          }
+        }
+      ],
+      "default": {
+        "S": -15
+      },
+      "atUsers": 320000
+    },
+    {
+      "id": "acquisition",
+      "act": 3,
+      "at": 1560,
+      "portrait": "bigLab",
+      "severity": 2,
+      "title": "The Acquisition Offer",
+      "body": "A big lab wants to buy you for \"an undisclosed number with a lot of zeros.\"",
+      "options": [
+        {
+          "label": "Accept",
+          "effects": {
+            "ending": "acquired_early"
+          }
+        },
+        {
+          "label": "Counter-offer",
+          "effects": {
+            "roll": {
+              "chance": 0.5,
+              "win": {
+                "followup": "acquisition_counter"
+              },
+              "lose": {
+                "note": "They walked. Their loss."
+              }
+            }
+          }
+        },
+        {
+          "label": "Decline publicly",
+          "effects": {
+            "R": 50,
+            "S": 10,
+            "M": -5
+          }
+        }
+      ],
+      "default": {
+        "R": 50,
+        "S": 10,
+        "M": -5
+      },
+      "atUsers": 550000
+    },
+    {
+      "id": "acquisition_counter",
+      "act": 3,
+      "at": -1,
+      "portrait": "bigLab",
+      "severity": 1,
+      "title": "More Zeros",
+      "body": "They came back. The number now has one more zero and twice the lawyers.",
+      "options": [
+        {
+          "label": "Accept",
+          "effects": {
+            "ending": "acquired_early"
+          }
+        },
+        {
+          "label": "Walk away",
+          "effects": {
+            "R": 30,
+            "M": 5
+          }
+        }
+      ],
+      "default": {
+        "R": 30,
+        "M": 5
+      }
+    },
+    {
+      "id": "meltdown",
+      "act": 3,
+      "at": 1740,
+      "portrait": "server",
+      "severity": 3,
+      "title": "Launch Day Meltdown",
+      "body": "A traffic spike is melting your servers. The status page is also down.",
+      "options": [
+        {
+          "label": "Emergency infra ($50,000)",
+          "cost": 50000,
+          "effects": {
+            "users": 10000
+          }
+        },
+        {
+          "label": "Throttle signups",
+          "effects": {
+            "S": 5,
+            "temp": {
+              "stat": "growth",
+              "mult": 0.7,
+              "sec": 30
+            }
+          }
+        },
+        {
+          "label": "Let it ride",
+          "effects": {
+            "R": 80,
+            "roll": {
+              "chance": 0.5,
+              "win": {
+                "note": "The servers held. Somehow."
+              },
+              "lose": {
+                "S": -25,
+                "note": "Outage. The memes are not kind."
+              }
+            }
+          }
+        }
+      ],
+      "default": {
+        "R": 80,
+        "roll": {
+          "chance": 0.5,
+          "win": {
+            "note": "The servers held. Somehow."
+          },
+          "lose": {
+            "S": -25,
+            "note": "Outage. The memes are not kind."
+          }
+        }
+      },
+      "atUsers": 820000
+    }
+  ]
+}

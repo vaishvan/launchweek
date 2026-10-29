@@ -1,0 +1,12 @@
+{
+  "_note": "Checked in this order (content doc section 7).",
+  "endings": [
+    { "id": "shutdown",       "title": "Shutdown",            "icon": "end_shutdown", "good": false, "epitaph": "Ran out of runway, then ran out of excuses." },
+    { "id": "acquired_early", "title": "Acquired (Early Exit)","icon": "end_acquired", "good": true,  "epitaph": "Sold for a number with a lot of zeros and a lot of lawyers." },
+    { "id": "scandal",        "title": "Scandal Rocket",      "icon": "end_scandal",  "good": false, "epitaph": "A million users, none of whom would say your name out loud." },
+    { "id": "burnout",        "title": "Burnout Unicorn",     "icon": "end_burnout",  "good": false, "epitaph": "A million users and one very tired team." },
+    { "id": "acquired_big",   "title": "Acquired by a Big Lab","icon": "end_biglab",  "good": true,  "epitaph": "Rescued by the same company you called a competitor." },
+    { "id": "ipo",            "title": "IPO Bell",            "icon": "end_ipo",      "good": true,  "epitaph": "Rang the bell. Nobody asked about the Bad Tweet." },
+    { "id": "zombie",         "title": "Zombie Startup",      "icon": "end_zombie",   "good": false, "epitaph": "Still technically alive. Still technically a startup." }
+  ]
+}

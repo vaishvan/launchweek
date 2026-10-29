@@ -1,0 +1,343 @@
+{
+  "_note": "Every balance number lives here. Starting values from launch-week-content.md v1; tune in playtest.",
+  "run": {
+    "startCash": 250,
+    "startSentiment": 1.0,
+    "startMorale": 70,
+    "hardEndSec": 1920,
+    "tickHz": 20,
+    "landingPageOutput": 1.5
+  },
+  "income": {
+    "perUserPerSec": 0.0006
+  },
+  "multipliers": {
+    "floor": 0.3,
+    "ceiling": 6.0
+  },
+  "sentiment": {
+    "min": 0.5,
+    "max": 2.0,
+    "unit": 0.01,
+    "driftToward": 1.0,
+    "driftPerSec": 0.0002,
+    "churnBelow": 0.8,
+    "churnPerSec": 0.004
+  },
+  "reach": {
+    "unitBuff": 0.01,
+    "maxBuff": 3.0,
+    "minBuff": 0.6,
+    "cardHoldSec": 20,
+    "cardDecaySec": 40
+  },
+  "morale": {
+    "min": 0,
+    "max": 100,
+    "multAt0": 0.6,
+    "multAt100": 1.4,
+    "salaryShareLimit": 0.6,
+    "salaryGraceSec": 30,
+    "drainPerSec": 0.8,
+    "recoverToward": 70,
+    "recoverPerSec": 0.05,
+    "burnoutBelow": 15,
+    "burnoutHireMult": 0.5,
+    "graceUntilSec": 180
+  },
+  "tap": {
+    "base": 1,
+    "targetRate": 3,
+    "comboPerTap": 0.025,
+    "comboDecayPerSec": 0.12,
+    "comboBonusMax": 0.1,
+    "launchMomentReach": 25,
+    "launchMomentHoldSec": 10,
+    "launchMomentDecaySec": 30,
+    "designerTapBonus": 0.25,
+    "spamRateBase": 9,
+    "spamRatePerQuality": 2,
+    "spamSentimentPerTap": 0.0015,
+    "idleShare": 0.08
+  },
+  "comeback": {
+    "dropPct": 0.08,
+    "windowSec": 30,
+    "buff": 1.3,
+    "durationSec": 20,
+    "cooldownSec": 90
+  },
+  "hires": {
+    "copyCostMult": 1.8,
+    "maxCopies": 5,
+    "synergyPerHire": 0.15,
+    "roles": [
+      {
+        "id": "marketer",
+        "name": "Marketer",
+        "cost": 200,
+        "salary": 0.5,
+        "output": 2,
+        "boosts": [
+          "twitter",
+          "paidads"
+        ]
+      },
+      {
+        "id": "community",
+        "name": "Community Manager",
+        "cost": 400,
+        "salary": 0.8,
+        "output": 3,
+        "boosts": [
+          "reddit",
+          "newsletter"
+        ]
+      },
+      {
+        "id": "seo",
+        "name": "SEO Writer",
+        "cost": 600,
+        "salary": 1.0,
+        "output": 4,
+        "boosts": [
+          "seo",
+          "newsletter"
+        ]
+      },
+      {
+        "id": "designer",
+        "name": "Designer",
+        "cost": 1000,
+        "salary": 1.5,
+        "output": 5,
+        "boosts": [
+          "creators"
+        ]
+      },
+      {
+        "id": "analyst",
+        "name": "Data Analyst",
+        "cost": 2500,
+        "salary": 3.0,
+        "output": 8,
+        "boosts": [
+          "paidads",
+          "referral"
+        ]
+      },
+      {
+        "id": "engineer",
+        "name": "Engineer",
+        "cost": 5000,
+        "salary": 5.0,
+        "output": 15,
+        "boosts": [
+          "referral",
+          "partnerships"
+        ]
+      }
+    ]
+  },
+  "channels": {
+    "levelCostMult": 1.6,
+    "maxLevel": 8,
+    "list": [
+      {
+        "id": "twitter",
+        "name": "Twitter/X",
+        "unlockUsers": 0,
+        "cost": 100,
+        "output": 3,
+        "risk": "spiky"
+      },
+      {
+        "id": "reddit",
+        "name": "Reddit",
+        "unlockUsers": 500,
+        "cost": 300,
+        "output": 5,
+        "risk": "low"
+      },
+      {
+        "id": "seo",
+        "name": "SEO",
+        "unlockUsers": 1000,
+        "cost": 500,
+        "output": 4,
+        "risk": "seo"
+      },
+      {
+        "id": "newsletter",
+        "name": "Newsletter",
+        "unlockUsers": 3000,
+        "cost": 1200,
+        "output": 8,
+        "risk": "safe"
+      },
+      {
+        "id": "referral",
+        "name": "Referral",
+        "unlockUsers": 10000,
+        "cost": 4000,
+        "output": 25,
+        "risk": "medium"
+      },
+      {
+        "id": "creators",
+        "name": "Creator deals",
+        "unlockUsers": 25000,
+        "cost": 10000,
+        "output": 60,
+        "risk": "bursty"
+      },
+      {
+        "id": "paidads",
+        "name": "Paid ads",
+        "unlockUsers": -1,
+        "unlockAct": 2,
+        "cost": 15000,
+        "output": 150,
+        "risk": "ads"
+      },
+      {
+        "id": "partnerships",
+        "name": "Partnerships",
+        "unlockUsers": 100000,
+        "cost": 60000,
+        "output": 400,
+        "risk": "events"
+      }
+    ],
+    "twitterSpikeMin": 0.5,
+    "twitterSpikeMax": 1.8,
+    "twitterSpikeEverySec": 5,
+    "seoSentimentPerLevelSec": 5e-05,
+    "adsSentimentPerLevelSec": -0.0001,
+    "creatorBurstEverySec": 15,
+    "creatorBurstChance": 0.35,
+    "creatorBurstReach": 12,
+    "creatorBurstUsersSec": 20,
+    "partnerEventEverySec": 60,
+    "partnerEventSec": 20,
+    "partnerEventMult": 1.6,
+    "partnerQuietMult": 0.8
+  },
+  "upgrades": [
+    {
+      "id": "templates",
+      "name": "Content Templates",
+      "cost": 150,
+      "tapAdd": 3
+    },
+    {
+      "id": "pipeline",
+      "name": "Ship Pipeline",
+      "cost": 2000,
+      "tapAdd": 15,
+      "comboFill": 1.25
+    },
+    {
+      "id": "playbook",
+      "name": "Launch Playbook",
+      "cost": 12000,
+      "launchMult": 2
+    },
+    {
+      "id": "demo",
+      "name": "Demo Machine",
+      "cost": 50000,
+      "tapAdd": 60,
+      "needs": "engineer"
+    },
+    {
+      "id": "hooks",
+      "name": "Viral Hooks",
+      "cost": 200000,
+      "tapAdd": 150,
+      "miniLaunchEvery": 10
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "preseed",
+      "name": "Pre-seed",
+      "target": 1000,
+      "deadline": 240,
+      "injection": 1000
+    },
+    {
+      "id": "seed",
+      "name": "Seed",
+      "target": 10000,
+      "deadline": 660,
+      "injection": 8000
+    },
+    {
+      "id": "seriesA",
+      "name": "Series A",
+      "target": 50000,
+      "deadline": 1050,
+      "injection": 40000
+    },
+    {
+      "id": "seriesB",
+      "name": "Series B",
+      "target": 200000,
+      "deadline": 1320,
+      "injection": 150000
+    },
+    {
+      "id": "seriesC",
+      "name": "Series C",
+      "target": 500000,
+      "deadline": 1620,
+      "injection": 500000
+    },
+    {
+      "id": "final",
+      "name": "Final",
+      "target": 1000000,
+      "deadline": 1920,
+      "injection": 0,
+      "final": true
+    }
+  ],
+  "loan": {
+    "advanceShare": 0.5,
+    "outputPenalty": 0.85,
+    "maxLoans": 3
+  },
+  "cards": {
+    "timerSec": 15,
+    "maxPanelWaitSec": 8,
+    "minGapSec": 25
+  },
+  "acts": [
+    {
+      "act": 1,
+      "name": "Launch",
+      "afterCheckpoint": null
+    },
+    {
+      "act": 2,
+      "name": "Scale",
+      "afterCheckpoint": "seed"
+    },
+    {
+      "act": 3,
+      "name": "Empire",
+      "afterCheckpoint": "seriesB"
+    }
+  ],
+  "economy": {
+    "_note": "Prices: base x (base/priceCurveFrom)^exp x scale. Cheap items keep the content-doc price; expensive ones grow faster, which slows the late game. Upgrades use their own exponent.",
+    "priceCurveFrom": 100,
+    "priceCurveExp": 0.75,
+    "upgradeScale": 1,
+    "priceScale": 1,
+    "injectionScale": 0.3,
+    "cardCashScale": 0.5,
+    "upgradeExp": 0.3
+  }
+}
