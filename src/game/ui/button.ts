@@ -25,24 +25,27 @@ export class Button extends Phaser.GameObjects.Container {
   label: Phaser.GameObjects.BitmapText;
   enabled = true;
   private down = false;
+  private hit: Phaser.GameObjects.Zone;
 
   constructor(scene: Phaser.Scene, x: number, y: number, readonly o: ButtonOpts, onClick: () => void) {
     super(scene, x, y);
     this.g = scene.add.graphics();
     this.label = text(scene, 0, 0, o.label, o.textColor ?? C.white, o.scale ?? 1);
     this.add([this.g, this.label]);
-    this.setSize(o.w, o.h);
-    this.setInteractive(new Phaser.Geom.Rectangle(0, 0, o.w, o.h), Phaser.Geom.Rectangle.Contains);
-    this.on("pointerdown", () => {
+    // Hit area: a zone child with a top-left origin. (A Container's own hit area is
+    // centred on its position, which shifted every button's tap target up and left.)
+    this.hit = scene.add.zone(0, 0, o.w, o.h).setOrigin(0, 0).setInteractive();
+    this.add(this.hit);
+    this.hit.on("pointerdown", () => {
       if (!this.enabled) return;
       this.down = true;
       this.draw();
     });
-    this.on("pointerout", () => {
+    this.hit.on("pointerout", () => {
       this.down = false;
       this.draw();
     });
-    this.on("pointerup", () => {
+    this.hit.on("pointerup", () => {
       if (!this.down) return;
       this.down = false;
       this.draw();

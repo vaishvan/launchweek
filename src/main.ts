@@ -28,3 +28,6 @@ export const game = new Phaser.Game({
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
   scene: [BootScene, TitleScene, GameScene, EndScene],
 });
+
+// debug handle for automated input tests (tools/capture.mjs, probes)
+(window as unknown as { __lw: Phaser.Game }).__lw = game;
