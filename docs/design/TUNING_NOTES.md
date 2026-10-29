@@ -5,18 +5,28 @@ Balance is checked with bots: `npx vitest run --config tools/balance/vitest.bala
 (env `BOTS=pace,idler,tapper,chaos,acquire`, `SEEDS=N`, `TAP=taps per second`).
 
 ## Results with the current numbers
+Run retimed from ~30 to ~20 minutes on 2026-10-29 (see the table below the results).
 | Player | Result |
 |---|---|
-| Steady player, 2.5 taps/s | 1M in 24-27 min, IPO Bell, tap share ~30% |
-| Fast tapper, 3 taps/s | 1M in ~22 min |
-| Casual, 1.5 taps/s | Zombie Startup at 600-780K |
-| Taps only / idle only | Zombie Startup (150-280K) |
-| Accepts the acquisition | Acquired (early exit) around 20-22 min |
+| Steady player, 2.5 taps/s | 1M in 18-19 min, IPO Bell, tap share ~28% |
+| Fast tapper, 3 taps/s | 1M in 17-18.5 min |
+| Casual, 1.5 taps/s | Zombie Startup at 500-640K |
+| Taps only / idle only | Zombie Startup (125-345K) |
+
+## 20-minute retime (2026-10-29)
+| What | Was | Now | Why |
+|---|---|---|---|
+| Hard end, checkpoint deadlines, card `at` times, early-hire grace | 32:00 etc. | x2/3 (hard end 21:20) | Owner wants ~20 min runs |
+| Income per user | $0.0006/s | $0.0011/s | Faster economy to fit the shorter clock |
+| `priceScale` | 1 | 0.7 | Cheaper hires, channels and upgrades |
+| `injectionScale` | 0.3 | 0.4 | Bigger investor cash at each checkpoint |
+| Landing page | 1.5 users/s | 2.5 users/s | Faster first minute |
+User-count card triggers (`atUsers`) and checkpoint user targets are unchanged.
 
 ## Changes from the content doc (and why)
 | What | Doc | Build | Why |
 |---|---|---|---|
-| Income per user | $0.002/s | $0.0006/s | With doc values a bot reached 1M in 6 minutes |
+| Income per user | $0.002/s | $0.0006/s (now $0.0011/s, see retime) | With doc values a bot reached 1M in 6 minutes |
 | Prices | base cost | base x (base/100)^0.75 (upgrades ^0.3) | Cheap items keep doc prices (first buys in seconds); expensive ones grow faster to slow the late game |
 | Checkpoint cash and loans | as listed | x0.3 | Injections were worth 10+ minutes of income |
 | Card cash rewards | as listed | x0.5 | Same reason; card costs are unchanged |
@@ -46,4 +56,4 @@ Balance is checked with bots: `npx vitest run --config tools/balance/vitest.bala
 | Q16 font | pxl's 3x5 pixel font as a proportional bitmap font |
 | Q17 endings audio | 3 jingles (good / mixed / bad) |
 | Units | S 1 = 0.01x sentiment; R 1 = +1% hype buff (cards hold 20 s, decay 40 s); M 1 = 1 morale point |
-| Doc conflicts | Content doc wins (Operator: morale drains 10% faster; Hype Fund: sentiment gains -25%; Brand Angel: hires +20%); run hard-ends at 32:00 |
+| Doc conflicts | Content doc wins (Operator: morale drains 10% faster; Hype Fund: sentiment gains -25%; Brand Angel: hires +20%); run hard-ends at 21:20 |

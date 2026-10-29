@@ -177,7 +177,7 @@ describe("crisis cards", () => {
     for (const sim of [a, b]) {
       sim.s.fired = Object.fromEntries(CARDS.map((c) => [c.id, c.id !== "pile_on"]));
       sim.s.cpIndex = CHECKPOINTS.length - 1;
-      sim.s.t = 1380;
+      sim.s.t = CARDS.find((c) => c.id === "pile_on")!.at;
       sim.s.users = 1000;
       run(sim, 0.1);
       expect(sim.s.card?.id).toBe("pile_on");
@@ -191,7 +191,7 @@ describe("crisis cards", () => {
     sim.s.flags.paidCreator = true;
     sim.s.fired = Object.fromEntries(CARDS.map((c) => [c.id, c.id !== "creator_raise"]));
     sim.s.cpIndex = CHECKPOINTS.length - 1;
-    sim.s.t = 840;
+    sim.s.t = CARDS.find((c) => c.id === "creator_raise")!.at;
     run(sim, 0.1);
     expect(sim.s.card?.title).toBe("The Creator Wants a Raise");
   });
@@ -200,7 +200,7 @@ describe("crisis cards", () => {
     const sim = new Sim(1);
     sim.s.fired = Object.fromEntries(CARDS.map((c) => [c.id, c.id !== "acquisition"]));
     sim.s.cpIndex = CHECKPOINTS.length - 1;
-    sim.s.t = 1560;
+    sim.s.t = CARDS.find((c) => c.id === "acquisition")!.at;
     run(sim, 0.1);
     sim.chooseCard(0);
     expect(sim.s.ending).toBe("acquired_early");
@@ -233,12 +233,12 @@ describe("endings", () => {
 });
 
 describe("full runs (bots)", () => {
-  it("a steady player reaches 1M in roughly 22-31 minutes", () => {
+  it("a steady player reaches 1M in roughly 15-21 minutes", () => {
     for (const seed of [1, 2]) {
       const sim = runBot(new Sim(seed), new Bot("pace", 2.75));
       expect(sim.s.ending).not.toBe("zombie");
-      expect(sim.s.t).toBeGreaterThan(22 * 60);
-      expect(sim.s.t).toBeLessThan(31 * 60);
+      expect(sim.s.t).toBeGreaterThan(15 * 60);
+      expect(sim.s.t).toBeLessThan(21 * 60);
       const share = sim.s.tapUsers / (sim.s.tapUsers + sim.s.idleUsers);
       expect(share).toBeGreaterThan(0.2);
       expect(share).toBeLessThan(0.4);

@@ -6,7 +6,7 @@
 ## Where we are
 Full run is playable: title -> 3 acts -> 12 crisis cards -> 6 checkpoints with investor terms -> 7 endings with a share card.
 Art is pxl (`assets_src/art/*.px.js`), audio is chirp (`assets_src/audio/*.cx.js`). 22 unit tests pass; smoke passes;
-bots finish a run in 24-27 min at 2.5 taps/s.
+bots finish a run in 18-19 min at 2.5 taps/s (retimed from 30 to ~20 min on 2026-10-29).
 
 ## What changed last session
 - Scaffolded from the kit (web overlay), built the rules engine (`src/core/sim.ts`), bots, all scenes, art and audio.
