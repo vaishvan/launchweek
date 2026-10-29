@@ -21,6 +21,7 @@ Run retimed from ~30 to ~20 minutes on 2026-10-29 (see the table below the resul
 | `priceScale` | 1 | 0.7 | Cheaper hires, channels and upgrades |
 | `injectionScale` | 0.3 | 0.4 | Bigger investor cash at each checkpoint |
 | Landing page | 1.5 users/s | 2.5 users/s | Faster first minute |
+| Start cash | $250 | $1,000 | Owner wants more money up front; bots: steady 17.5-20 min, fast 15-16 min, casual 570-690K |
 User-count card triggers (`atUsers`) and checkpoint user targets are unchanged.
 
 ## Changes from the content doc (and why)

@@ -1,7 +1,7 @@
 {
   "_note": "Every balance number lives here. Starting values from launch-week-content.md v1; tune in playtest.",
   "run": {
-    "startCash": 250,
+    "startCash": 1000,
     "startSentiment": 1.0,
     "startMorale": 70,
     "hardEndSec": 1280,
