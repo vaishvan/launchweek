@@ -36,6 +36,14 @@ describe("economy", () => {
     expect(sim.s.hires.marketer).toBe(T.hires.maxCopies);
   });
 
+  it("income per user grows with the company, so late prices stay reachable", () => {
+    const sim = new Sim(1);
+    sim.s.users = T.income.rampFromUsers / 2;
+    expect(sim.incomePerUser()).toBe(T.income.perUserPerSec); // flat below the ramp
+    sim.s.users = T.income.rampFromUsers * 16;
+    expect(sim.incomePerUser()).toBeCloseTo(T.income.perUserPerSec * Math.pow(16, T.income.rampExp));
+  });
+
   it("matching hires boost their channels (synergy)", () => {
     const sim = new Sim(1);
     sim.s.channels.reddit = 2;

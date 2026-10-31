@@ -204,7 +204,12 @@ export class Sim {
     return ROLES.reduce((a, r) => a + r.salary * this.s.hires[r.id], 0);
   }
   income(): number {
-    return this.s.users * T.income.perUserPerSec * this.mods().incomeMult * this.s.permIncomeMult * this.tempMult("income");
+    return this.s.users * this.incomePerUser() * this.mods().incomeMult * this.s.permIncomeMult * this.tempMult("income");
+  }
+  /** Each user earns more as the company grows (monetization at scale), so cash keeps up with late-game prices. */
+  incomePerUser(): number {
+    const ramp = Math.pow(Math.max(1, this.s.users / T.income.rampFromUsers), T.income.rampExp);
+    return T.income.perUserPerSec * ramp;
   }
 
   synergy(channelId: string): number {

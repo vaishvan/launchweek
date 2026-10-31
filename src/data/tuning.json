@@ -9,7 +9,10 @@
     "landingPageOutput": 2.5
   },
   "income": {
-    "perUserPerSec": 0.0022
+    "perUserPerSec": 0.0014,
+    "_ramp": "income per user x (users / rampFromUsers)^rampExp above rampFromUsers",
+    "rampFromUsers": 10000,
+    "rampExp": 0.5
   },
   "multipliers": {
     "floor": 0.3,
@@ -204,7 +207,7 @@
         "id": "partnerships",
         "name": "Partnerships",
         "unlockUsers": 100000,
-        "cost": 60000,
+        "cost": 25000,
         "output": 400,
         "risk": "events"
       }
@@ -253,8 +256,8 @@
     {
       "id": "hooks",
       "name": "Viral Hooks",
-      "cost": 200000,
-      "tapAdd": 150,
+      "cost": 120000,
+      "tapAdd": 80,
       "miniLaunchEvery": 10
     }
   ],
@@ -333,9 +336,9 @@
   "economy": {
     "_note": "Prices: base x (base/priceCurveFrom)^exp x scale. Cheap items keep the content-doc price; expensive ones grow faster, which slows the late game. Upgrades use their own exponent.",
     "priceCurveFrom": 100,
-    "priceCurveExp": 0.75,
-    "upgradeScale": 1,
-    "priceScale": 0.3,
+    "priceCurveExp": 0.4,
+    "upgradeScale": 0.15,
+    "priceScale": 1.0,
     "injectionScale": 0.4,
     "cardCashScale": 0.5,
     "upgradeExp": 0.3

@@ -5,7 +5,7 @@
 
 ## Where we are
 Full run is playable: title -> 3 acts -> 12 crisis cards -> 6 checkpoints with investor terms -> 7 endings with a share card.
-Art is pxl (`assets_src/art/*.px.js`), audio is chirp (`assets_src/audio/*.cx.js`). 22 unit tests pass; smoke passes;
+Art is pxl (`assets_src/art/*.px.js`), audio is chirp (`assets_src/audio/*.cx.js`). 26 unit tests pass; smoke passes;
 bots finish a run in 14-16 min at a casual 1.5 taps/s (retimed 30 -> 20 -> 15 min on 2026-10-29).
 
 ## What changed last session

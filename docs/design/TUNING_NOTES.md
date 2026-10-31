@@ -8,11 +8,25 @@ Balance is checked with bots: `npx vitest run --config tools/balance/vitest.bala
 Target since 2026-10-29: a casual player (1.5 taps/s) finishes in about 15 real minutes.
 | Player | Result |
 |---|---|
-| Casual, 1.5 taps/s | 1M in 14-16 min, IPO Bell, tap share ~17% |
-| Steady, 2.5 taps/s | 1M in 11.5-13.5 min, tap share ~26% |
-| Fast tapper, 3 taps/s | 1M in 10.5-11.5 min |
-| Random card choices (chaos bot) | 1M in 14-15 min |
-| Taps only / idle only | Zombie Startup (115-555K) |
+| Casual, 1.5 taps/s | 1M in 14-15.5 min, IPO Bell, tap share ~22%, buys all 5 upgrades |
+| Steady, 2.5 taps/s | 1M in 10-11.5 min, tap share ~31% |
+| Fast tapper, 3 taps/s | 1M in 9.5-10 min, tap share ~35% |
+| Random card choices (chaos bot) | 1M in 11.5-14.5 min |
+| Taps only / idle only | Zombie Startup (325-465K) |
+
+## Money grows with the company (2026-10-31)
+Problem: after Act 2 the late upgrades and channels cost 15-45 minutes of income (Viral Hooks $2M, Partnerships
+$2.2M), so nobody bought them. Income was flat per user while late prices grew much faster, and upgrades ignored
+`priceScale` entirely.
+| What | Was | Now | Why |
+|---|---|---|---|
+| Income per user | flat $0.0022/s | $0.0014/s x (users / 10K)^0.5 above 10K users (`rampFromUsers`, `rampExp`) | Cash keeps up with late prices: x3.2 at 100K users, x10 at 1M |
+| `priceCurveExp` / `priceScale` | 0.75 / 0.3 | 0.4 / 1.0 | Cheap and mid items cost about the same; top channels cost about half |
+| `upgradeScale` | 1 | 0.15 | Upgrades had no price cut at all |
+| Partnerships base cost | 60,000 | 25,000 | Was 6.5 min of income at Act 3 start, now ~2 min |
+| Viral Hooks base cost / tap bonus | 200,000 / +150 | 120,000 / +80 | Affordable in Act 3; cheaper hooks made taps 44% of growth, the smaller bonus keeps it near 30% |
+Rule of thumb now: every late item costs about 1-2 minutes of income when Act 3 starts. The pace bot never saves up
+(it buys the best affordable item at once), so it skips Partnerships; a player who saves will finish a little sooner.
 
 ## 15-minute retime (2026-10-29, on top of the 20-minute one)
 | What | Was | Now | Why |
